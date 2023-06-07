@@ -1,7 +1,7 @@
 // #include <stdio.h>
 #include <string.h>
 #include <conio.h>
-#include "pq.h"
+#include "header/pq.h"
 
 int id = 1000;
 char name[100];
