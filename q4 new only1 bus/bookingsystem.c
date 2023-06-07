@@ -67,10 +67,22 @@ void bookgui()
     printf("Age: ");
     scanf("%d", &age);
 
-    ticket *temp = (ticket *)malloc(sizeof(ticket));
-    createNewTicket(&temp, name, age, id++);
-    bookTicket(*temp);
-    free(temp);
+    // ticket *temp = (ticket *)malloc(sizeof(ticket));
+    // createNewTicket(&temp, name, age, id++);
+    // bookTicket(*temp);
+    // free(temp);
+
+
+
+
+    ticket t;
+    t.age = age;
+    t.id = id++;
+    strcpy(t.name, name);
+    bookTicket(t);
+
+
+
     // free(name);
 
     printf("Process Completed");

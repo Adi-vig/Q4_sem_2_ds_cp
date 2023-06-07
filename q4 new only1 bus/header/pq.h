@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #define MAX 2
 
 typedef struct
 {
-    char *name;
+    char name[100];
     int age;
     int id;
     int status; // 0 to confirm 1 to waitlist ........ add in future if want
@@ -62,8 +63,13 @@ void insert(ticket array[], int *count, ticket T)
     {
 
         array[0].age = T.age;
-        array[0].name = (char *)malloc(sizeof(T.name));
-        array[0].name = T.name;
+
+        // array[0].name = (char *)malloc(sizeof(T.name));
+        // array[0].name = T.name;
+
+        strcpy(array[0].name , T.name);
+
+        
         array[0].id = T.id;
 
         // printf("\nssaaa : %d",T.age );
@@ -72,8 +78,13 @@ void insert(ticket array[], int *count, ticket T)
     else
     {
         array[*count].age = T.age;
-        array[*count].name = (char *)malloc(sizeof(T.name));
-        array[*count].name = T.name;
+        // array[*count].name = (char *)malloc(sizeof(T.name));
+        // array[*count].name = T.name;
+
+        strcpy(array[*count].name , T.name);
+        array[*count].id = T.id;
+
+
         array[*count].id = T.id;
 
         *count += 1;
@@ -156,22 +167,25 @@ void cancel(int id)
     }
 }
 
-void createNewTicket(ticket **newTic, char *name1, int age1, int id1)
-{
-    // ticket* newTic= (ticket*)malloc(sizeof(ticket));
-    (*newTic)->age = age1;
-    (*newTic)->id = id1;
-    (*newTic)->name = (char *)malloc(sizeof(name1));
-    (*newTic)->name = name1;
+// void createNewTicket(ticket **newTic, char *name1, int age1, int id1)
+// {
+//     // ticket* newTic= (ticket*)malloc(sizeof(ticket));
+//     (*newTic)->age = age1;
+//     (*newTic)->id = id1;
+//     (*newTic)->name = (char *)malloc(sizeof(name1));
+//     (*newTic)->name = name1;
 
-    if (confCount < MAX)
-        (*newTic)->status = 0; // confirm
-    else if (waitCount < MAX)
-        (*newTic)->status = -1;
-}
+//     if (confCount < MAX)
+//         (*newTic)->status = 0; // confirm
+//     else if (waitCount < MAX)
+//         (*newTic)->status = -1;
+// }
 
-void bookTicket(ticket t)
+void bookTicket(ticket t )
 {
+
+    
+
     if (confCount < MAX)
     {
         insert(confimed, &confCount, t);
