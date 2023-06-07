@@ -1,17 +1,61 @@
 // #include <stdio.h>
-#include<string.h>
+#include <string.h>
 #include <conio.h>
 #include "pq.h"
 
-int id=1000;
+int id = 1000;
 char name[100];
 
-void bookgui(){
-    // int id=1000;
-    int age=0;
+void displayBoth();
+void cancelgui();
+void bookgui();
+void menu();
+
+int main()
+{
+    while (1)
+        menu();
+    return 0;
+}
+
+void menu()
+{
+    // int n;
+
+    int choice = 0;
+    printf("\n\n**********Buss Reservation System Mumbai to Pune*********\n\t1.Book a Ticket\n\t2.Cancel Ticket\n\t3.Display Booking List\n\t0.Exit\n\nEnter your choice :");
+
+    scanf(" %d", &choice);
+    // system("cls");
+    if (choice == 0)
+        exit(0);
+
+    switch (choice)
+    {
+    case 1:
+        bookgui();
+        break;
+
+    case 2:
+
+        cancelgui();
+        break;
+
+    case 3:
+        displayBoth();
+        break;
+
+    default:
+        printf("\nInvalid Choice.");
+        break;
+    }
+}
+
+void bookgui()
+{
+
+    int age = 0;
     // char* name = (char* )malloc(100);
-    
-    // char* p;
 
     system("cls");
     printf("Enter details\n");
@@ -19,33 +63,22 @@ void bookgui(){
     fflush(stdin);
 
     fgets(name, 100, stdin);
-    printf("\n%s",name );
+    printf("\n%s", name);
     printf("Age: ");
     scanf("%d", &age);
 
-    ticket* temp= (ticket*)malloc(sizeof(ticket));
-    createNewTicket(&temp, name , age , id++);
+    ticket *temp = (ticket *)malloc(sizeof(ticket));
+    createNewTicket(&temp, name, age, id++);
     bookTicket(*temp);
     free(temp);
     // free(name);
 
     printf("Process Completed");
-    printf("\nTicket ID : %d", id-1);
-    // system("cls");
-    
-    
-
-    
-
-    
-
+    printf("\nTicket ID : %d", id - 1);
 }
 
-
-
-
-
-void cancelgui(){
+void cancelgui()
+{
     system("cls");
     int a;
     printf("Enter Ticket ID to Cancel:");
@@ -55,8 +88,8 @@ void cancelgui(){
     // system("cls");
 }
 
-
-void displayBoth(){
+void displayBoth()
+{
     system("cls");
     printf("Confirmed List: ");
     display(confimed, confCount);
@@ -64,60 +97,4 @@ void displayBoth(){
 
     printf("Waiting List: ");
     display(waitList, waitCount);
-    
-}
-
-
-
-
-void menu(){
-    // int n;
-
-    
-    int choice=0;
-    printf("\n\n**********Buss Reservation System Mumbai to Pune*********\n\t1.Book a Ticket\n\t2.Cancel Ticket\n\t3.Display Booking List\n\t0.Exit\n\nEnter your choice :");
-    
-    
-    scanf(" %d", &choice);
-    // system("cls");
-    if(choice==0)exit(0);
-
-    switch (choice)
-    {
-    case 1:
-        bookgui();
-        break;
-    
-    case 2:
-
-        cancelgui();
-        break;
-    
-    case 3:
-        displayBoth();
-        break;
-    
-    
-    default:
-        printf("\nInvalid Choice.");
-        break;
-    }
-
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-int main(){
-
-    while(1)menu();
-    return 0;
 }
