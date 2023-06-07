@@ -37,8 +37,69 @@ void swap(ticket *a, ticket *b)
 
 
 
+void bubblesort(ticket arr[], int size){
+    int temp = size;
+    size--;
+    
+    while(size--){
+        // printf("pass %d \t\t", (temp-size-1));
+        
+        for(int i=0; i < temp-1 ;i++){
+            
+            if(arr[i].age < arr[i+1].age)
+            {
+                swap(&arr[i] , &arr[i+1]);
+            }
+        }
+        // print(arr,temp);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Function to heapify the tree
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void heapify(ticket array[], int size , int i)
 {
     if (size == 1)
@@ -71,18 +132,6 @@ void heapify(ticket array[], int size , int i)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // Function to insert an element into the tree
 void insert(ticket array[] , int *count , ticket T )
 { 
@@ -97,7 +146,7 @@ void insert(ticket array[] , int *count , ticket T )
         array[0].id= T.id;
 
         
-        printf("\nssaaa : %d",T.age );
+        // printf("\nssaaa : %d",T.age );
         *count += 1;
     }
     else
@@ -109,11 +158,18 @@ void insert(ticket array[] , int *count , ticket T )
 
         *count += 1;
 
-        printf("\nconficount : %d ",  confCount);
-        for (int i = *count / 2 - 1; i >= 0; i--)
-        {
-            heapify(array, *count , i);
-        }
+        
+        
+        // printf("\nconficount : %d ",  confCount);
+        
+        
+        // for (int i = *count / 2 - 1; i >= 0; i--)
+        // {
+        //     heapify(array, *count , i);
+        // }
+
+        bubblesort(array, *count);
+
     }
 }
 
@@ -155,16 +211,25 @@ void cancel( int id){
 
 
 
-        for (int i = confCount / 2 - 1; i >= 0; i--) {
-            heapify(confimed, confCount, i);
-        }
+        // for (int i = confCount / 2 - 1; i >= 0; i--) {
+        //     heapify(confimed, confCount, i);
+        // }
+            
+            bubblesort(confimed, confCount);
+
+
+
         if(waitCount){
                 swap(&waitList[0], &waitList[waitCount-1]);
                 waitCount--;
 
-                for (int i = waitCount / 2 - 1; i >= 0; i--) {
-                    heapify(waitList,  waitCount, i);
-                }
+                // for (int i = waitCount / 2 - 1; i >= 0; i--) {
+                //     heapify(waitList,  waitCount, i);
+                // }
+
+                bubblesort(waitList, waitCount);
+
+
             }
         else{
             confCount--;
@@ -191,9 +256,11 @@ void cancel( int id){
         swap(&waitList[i], &waitList[waitCount-1]);
         waitCount--;
 
-        for (int i = waitCount / 2 - 1; i >= 0; i--) {
-            heapify(waitList,  waitCount, i);
-        }
+        // for (int i = waitCount / 2 - 1; i >= 0; i--) {
+        //     heapify(waitList,  waitCount, i);
+        // }
+
+        bubblesort(waitList, waitCount);
 
     }    
 
@@ -246,116 +313,83 @@ void bookTicket(ticket t){
 
 
 
-int main(){
 
-    ticket* temp= (ticket*)malloc(sizeof(ticket));
+
+
+
+
+// int main(){
+
+//     ticket* temp= (ticket*)malloc(sizeof(ticket));
 
     
 
-    // // ticket *t  = createNewTicket("Aditya", 18 , 1001);
-    // ticket *t2 = createNewTicket("sakhare", 17 , 1002);
-    // ticket *t3 = createNewTicket("adil", 16 , 1005);
-    // ticket *t4 = createNewTicket("sankal", 19 , 1004);
+//     // // ticket *t  = createNewTicket("Aditya", 18 , 1001);
+//     // ticket *t2 = createNewTicket("sakhare", 17 , 1002);
+//     // ticket *t3 = createNewTicket("adil", 16 , 1005);
+//     // ticket *t4 = createNewTicket("sankal", 19 , 1004);
 
 
 
-    // ticket* t5=createNewTicket("sankal", 19 , 1004);
+//     // ticket* t5=createNewTicket("sankal", 19 , 1004);
 
-// int a=0;
-// b[0].confCount=&a;
+// // int a=0;
+// // b[0].confCount=&a;
 
-// bookTicket( *t);
-// bookTicket(*t3);
-// bookTicket(*t2);
-// bookTicket(*t4);
-// bookTicket( *t);
-// bookTicket(*t3);
-// bookTicket(*t2);
-// bookTicket(*t4);
-
-
-
-
+// // bookTicket( *t);
+// // bookTicket(*t3);
+// // bookTicket(*t2);
+// // bookTicket(*t4);
+// // bookTicket( *t);
+// // bookTicket(*t3);
+// // bookTicket(*t2);
+// // bookTicket(*t4);
 
 
 
 
 
 
+// createNewTicket(&temp,"Aditya", 18 , 1001);
+// bookTicket(*temp);
+// // display(confimed, confCount);
+
+// // display(confimed, confCount);
+
+
+
+// createNewTicket(&temp,"fass", 34 , 1002);
+// bookTicket(*temp);
 
 
 
 
 
-createNewTicket(&temp,"Aditya", 18 , 1001);
-bookTicket(*temp);
+// createNewTicket(&temp,"Adil", 45 , 1003);
+// bookTicket(*temp);
+
+// createNewTicket(&temp,"ridi", 18 , 1006);
+// bookTicket(*temp);
+
+
+// // display(confimed, confCount);
+
+// cancel(1001);
+
+
+
+
+// // cancel(1006);
+
+// // display(waitList, waitCount);
+
 // display(confimed, confCount);
-
-// display(confimed, confCount);
-
-
-
-createNewTicket(&temp,"fass", 34 , 1002);
-bookTicket(*temp);
-display(confimed, confCount);
-
-
-
-
-createNewTicket(&temp,"Adil", 45 , 1003);
-bookTicket(*temp);
-
-createNewTicket(&temp,"ridi", 18 , 1006);
-bookTicket(*temp);
-
-// display(waitList, waitCount);
-
-cancel(1001);
-
-display(confimed, confCount);
-
-
-cancel(1006);
-
-display(waitList, waitCount);
-
-
-
-
-
-
-
-
-
 // display(waitList, waitCount);
 
 
 
-
-
-
-    // insert (b[0].confimed, &b[0].confCount  , 1 , "aditya");
-    // insert (b[0].confimed, &b[0].confCount , 3 , "aditya");
-    // insert (b[0].confimed, &b[0].confCount , 56, "aditya");
-    // insert (b[0].confimed, &b[0].confCount , 89, "aditya");
-    // display(b[0].confimed, b[0].confCount);
-
-
-    // insert (b[0].waitList, &b[0].waitCount  ,1  , "sakhare");
-    // insert (b[0].waitList, &b[0].waitCount  ,3  , "sakhare");
-    // insert (b[0].waitList, &b[0].waitCount  ,56 , "sakhare");
-    // insert (b[0].waitList, &b[0].waitCount  ,89 , "sakhare");
-    // display(b[0].waitList,  b[0].waitCount );
-
-
-
-
-
-
-
-
-    return 0;
-}
+//     return 0;
+// }
 
 
 
