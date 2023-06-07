@@ -122,8 +122,9 @@ void cancel(int id)
         else
         {
             swap(&confimed[i], &confimed[confCount - 1]);
-            bubblesort(confimed, confCount);
             confCount--;
+            bubblesort(confimed, confCount);
+            
         }
         printf("\nTicket Cancelled with ID %d", id);
 
