@@ -5,11 +5,11 @@
 
 typedef struct
 {
-    char *name;
+    char* name;
     int age;
-    int number;
+    int id;
+    // int status; // to confirm -1 to waitlist
 } ticket;
-
 
 
 
@@ -35,7 +35,7 @@ void swap(ticket *a, ticket *b)
 }
 
 
-bus b1;
+bus b[3];
 
 
 int size = 0;
@@ -74,21 +74,38 @@ void heapify(ticket array[], int size, int i)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Function to insert an element into the tree
-void insert(ticket* array, int newNum)
-{
+void insert(ticket* array , int count , ticket T )
+{ 
+    count++;
     if (size == 0)
     {
-        array[0].age = newNum;
-        array[0].name = (char*) malloc(sizeof("gay"));
-        array[0].name = "gay";
+        array[0].age = T.age;
+        array[0].name = (char*) malloc(sizeof(T.name));
+        array[0].name = T.name;
+        array[0].id= T.id;
+
         size += 1;
     }
     else
     {
-        array[size].age = newNum;
-        array[size].name = (char*) malloc(sizeof("gay"));
-        array[size].name = "gay";
+        array[size].age =  T.age;
+        array[size].name = (char*) malloc(sizeof(T.name));
+        array[size].name = T.name;
+        array[size].id= T.id;
 
         size += 1;
         for (int i = size / 2 - 1; i >= 0; i--)
@@ -98,6 +115,34 @@ void insert(ticket* array, int newNum)
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+// ticket* deleteRoot(ticket* T, int count ,int id) {
+//     int i;
+//     for (i = 0; i < count; i++) {
+//         if (id == T[i].id)
+//         break;
+//     }
+//     ticket temp* = (ticket*)malloc(sizeof(ticket));
+//     temp = T[i]
+
+//     swap(&T[i], &T[count - 1]);
+
+//     count -= 1;
+
+//     for (int i = count / 2 - 1; i >= 0; i--) {
+//         heapify(T, count, i);
+//     }
+//     return temp;
+// }
 
 
 
@@ -116,17 +161,144 @@ void display(ticket* arr, int n){
 
 
 
+void cancelConfirm(bus* bu , int id){
+
+    bool found=false;
+    int i;
+    for( i=0; i < bu->confCount ; i++){
+        if(id == bu->confimed[i].id){
+            found=true;
+            break;
+        }
+    }
+
+    bu->confCount-=1;
+    if(found){
+        swap(&bu->confimed[i], &bu->confimed[bu->confCount - 1]);
+    }
+    else 
+    {
+        printf("Ticket ID NOT FOUND");
+    }
+
+
+    
+
+    // delet from waitlist and add to confiem list
+
+    ticket T =bu->waitList[0];
+
+    swap(&bu->waitList[0], &bu->waitList[bu->waitCount-1]);
+
+    bu->waitCount -= 1;
+
+    for (int i = bu->waitCount / 2 - 1; i >= 0; i--) {
+        heapify(bu->waitList , bu->waitCount , i);
+    }
+
+
+
+
+
+
+
+
+
+    insert (bu->confimed, bu->confCount , T );
+
+
+
+}
+
+
+
+
+
+
+
+
+ticket* createNewTicket(char *name1, int age1, int id1){
+        ticket* newTic= (ticket*)malloc(sizeof(ticket));
+
+        newTic->age = age1;
+        newTic->id= id1;
+        newTic->name = (char*) malloc(sizeof(name1));  
+        newTic->name = name1;   
+}
+
+
+
+
+
+// new ticket
+// delete teicket
+// display
+    // select bus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void bookTicket(bus* bu, int ){
+
+}
+
+
+
+
+
+
 
 
 
 
 
 int main(){
-    insert(b1.confimed, 1);
-    insert(b1.confimed, 3);
-    insert(b1.confimed, 56);
-    insert(b1.confimed, 89);
-    display(b1.confimed,4);
+
+
+    ticket t* = createNewTicket("Aditya", 18 , 1001);
+    ticket t2* = createNewTicket("sakhare", 17 , 1002);
+    ticket t3* = createNewTicket("adil", 16 , 1005);
+    ticket t4* = createNewTicket("sankal", 19 , 1004);
+
+
+
+
+
+
+
+
+
+
+    // insert (b[0].confimed, &b[0].confCount  , 1 , "aditya");
+    // insert (b[0].confimed, &b[0].confCount , 3 , "aditya");
+    // insert (b[0].confimed, &b[0].confCount , 56, "aditya");
+    // insert (b[0].confimed, &b[0].confCount , 89, "aditya");
+    // display(b[0].confimed, b[0].confCount);
+
+
+    // insert (b[0].waitList, &b[0].waitCount  ,1  , "sakhare");
+    // insert (b[0].waitList, &b[0].waitCount  ,3  , "sakhare");
+    // insert (b[0].waitList, &b[0].waitCount  ,56 , "sakhare");
+    // insert (b[0].waitList, &b[0].waitCount  ,89 , "sakhare");
+    // display(b[0].waitList,  b[0].waitCount );
+
+
+
+
+
+
 
 
     return 0;
