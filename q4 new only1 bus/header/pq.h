@@ -25,6 +25,10 @@ void display(ticket arr[], int n);
 void cancel(int id);
 void createNewTicket(ticket **newTic, char *name1, int age1, int id1);
 void bookTicket(ticket t);
+void search(int id);
+
+
+
 
 void swap(ticket *a, ticket *b)
 {
@@ -71,6 +75,7 @@ void insert(ticket array[], int *count, ticket T)
 
         
         array[0].id = T.id;
+        array[0].status= T.status;
 
         // printf("\nssaaa : %d",T.age );
         *count += 1;
@@ -86,6 +91,7 @@ void insert(ticket array[], int *count, ticket T)
 
 
         array[*count].id = T.id;
+        array[*count].status= T.status;
 
         *count += 1;
 
@@ -137,7 +143,7 @@ void cancel(int id)
             bubblesort(confimed, confCount);
             
         }
-        printf("\nTicket Cancelled with ID %d", id);
+        printf("\nTicket Cancelled with ID %d \n", id);
 
         return;
     }
@@ -181,22 +187,60 @@ void cancel(int id)
 //         (*newTic)->status = -1;
 // }
 
-void bookTicket(ticket t )
+void bookTicket(ticket t)
 {
-
-    
-
     if (confCount < MAX)
     {
+        t.status=0; 
         insert(confimed, &confCount, t);
     }
     else if (waitCount < MAX)
     {
-        // t.status = 1;  //waiting
+        t.status = 1;  //waiting
         insert(waitList, &waitCount, t);
     }
     else
     {
         printf("\nBoth waiting and Confirm list are full.");
     }
+}
+
+
+
+
+void search(int id){
+    bool found = false;
+    ticket t;
+    int i;
+    for (i = 0; i < confCount; i++)
+    {
+        if (id == confimed[i].id)
+        {
+            found = true;
+            t=confimed[i];
+            break;
+        }
+    }
+
+
+    for (i = 0; i < waitCount; i++)
+    {
+        if (id == waitList[i].id)
+        {
+            found = true;
+            t=waitList[i];
+            break;
+        }
+    }
+
+    if (found)
+    { 
+        printf(" \n\n\tAge :%d\n\tName : %s  \n\tTicket ID: %d", t.age, t.name, t.id);
+        printf("\nStatus: ");
+        if( t.status == 0)printf("Confirmed");
+        else printf("In Waiting list");
+    }  
+    else
+    {printf("\n\nTicket ID NOT FOUND");}
+
 }

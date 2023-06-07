@@ -10,20 +10,20 @@ void displayBoth();
 void cancelgui();
 void bookgui();
 void menu();
+void searchgui();
 
 int main()
 {
-    while (1)
-        menu();
+    while (1)menu();
     return 0;
 }
 
 void menu()
 {
     // int n;
-
+    
     int choice = 0;
-    printf("\n\n**********Buss Reservation System Mumbai to Pune*********\n\t1.Book a Ticket\n\t2.Cancel Ticket\n\t3.Display Booking List\n\t0.Exit\n\nEnter your choice :");
+    printf("\n\n\n**********Buss Reservation System Mumbai to Pune*********\n\t1.Book a Ticket\n\t2.Cancel Ticket\n\t3.Display Booking List\n\t4.Ticket Status Enquiry\n\t0.Exit\n\nEnter your choice :");
 
     scanf(" %d", &choice);
     // system("cls");
@@ -44,9 +44,13 @@ void menu()
     case 3:
         displayBoth();
         break;
+    case 4:
+        searchgui();
+        break;
 
     default:
         printf("\nInvalid Choice.");
+        menu();
         break;
     }
 }
@@ -109,4 +113,20 @@ void displayBoth()
 
     printf("Waiting List: ");
     display(waitList, waitCount);
+}
+
+
+
+
+
+
+
+
+
+void searchgui(){
+    int id;
+    system("cls");
+    printf("\nEnter Ticket ID For Status Enquiry:");
+    scanf(" %d", &id);
+    search(id);
 }
