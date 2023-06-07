@@ -35,15 +35,18 @@ void swap(ticket *a, ticket *b)
 }
 
 
+
+
+
 bus b[3];
 
 
-int size = 0;
+// int size = 0;
 
 
 
 // Function to heapify the tree
-void heapify(ticket array[], int size, int i)
+void heapify(ticket array[], int size , int i)
 {
     if (size == 1)
     {
@@ -91,26 +94,26 @@ void heapify(ticket array[], int size, int i)
 void insert(ticket* array , int count , ticket T )
 { 
     count++;
-    if (size == 0)
+    if (count == 0)
     {
         array[0].age = T.age;
         array[0].name = (char*) malloc(sizeof(T.name));
         array[0].name = T.name;
         array[0].id= T.id;
 
-        size += 1;
+        count += 1;
     }
     else
     {
-        array[size].age =  T.age;
-        array[size].name = (char*) malloc(sizeof(T.name));
-        array[size].name = T.name;
-        array[size].id= T.id;
+        array[count].age =  T.age;
+        array[count].name = (char*) malloc(sizeof(T.name));
+        array[count].name = T.name;
+        array[count].id= T.id;
 
-        size += 1;
-        for (int i = size / 2 - 1; i >= 0; i--)
+        count += 1;
+        for (int i = count / 2 - 1; i >= 0; i--)
         {
-            heapify(array, size, i);
+            heapify(array, count , i);
         }
     }
 }
@@ -196,14 +199,6 @@ void cancelConfirm(bus* bu , int id){
         heapify(bu->waitList , bu->waitCount , i);
     }
 
-
-
-
-
-
-
-
-
     insert (bu->confimed, bu->confCount , T );
 
 
@@ -250,8 +245,16 @@ ticket* createNewTicket(char *name1, int age1, int id1){
 
 
 
-void bookTicket(bus* bu, int ){
+void bookTicket(bus* bu, ticket t){
+    if(bu->confCount < MAX-1){
+        insert(bu->confimed , bu->confCount , t);
+    }
+    else {
+        insert(bu->waitList , bu->waitCount, t);
+    }
 
+
+    
 }
 
 
@@ -267,10 +270,10 @@ void bookTicket(bus* bu, int ){
 int main(){
 
 
-    ticket t* = createNewTicket("Aditya", 18 , 1001);
-    ticket t2* = createNewTicket("sakhare", 17 , 1002);
-    ticket t3* = createNewTicket("adil", 16 , 1005);
-    ticket t4* = createNewTicket("sankal", 19 , 1004);
+    ticket *t  = createNewTicket("Aditya", 18 , 1001);
+    ticket *t2 = createNewTicket("sakhare", 17 , 1002);
+    ticket *t3 = createNewTicket("adil", 16 , 1005);
+    ticket *t4 = createNewTicket("sankal", 19 , 1004);
 
 
 
