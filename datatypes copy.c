@@ -27,10 +27,9 @@ typedef struct
 
 
 
-void swap(ticket **a, ticket **b)
+void swap(ticket *a, ticket *b)
 {
-    ticket* temp;
-    temp= *a;
+    ticket temp = *a;
     *a = *b;
     *b = temp;
 }
@@ -92,20 +91,16 @@ void heapify(ticket* array[], int *size , int i)
 
 
 // Function to insert an element into the tree
-void insert(ticket* array[] , int* count , ticket T )
+void insert(ticket** array , int* count , ticket T )
 { 
-    // *count++;
-    
+    *count++;
     if (*count == 0)
     {
-        
         array[0]->age = T.age;
-        array[0]->name = (char*)malloc(sizeof(T.name));
+        array[0]->name = (char*) malloc(sizeof(T.name));
         array[0]->name = T.name;
         array[0]->id= T.id;
 
-        
-        printf("\nssaaa : %d",T.age );
         *count += 1;
     }
     else
@@ -116,10 +111,9 @@ void insert(ticket* array[] , int* count , ticket T )
         array[*count]->id= T.id;
 
         *count += 1;
-
-        printf("conficount : %d ",  *b[0].confCount);
         for (int i = *count / 2 - 1; i >= 0; i--)
         {
+            printf("kk");
             heapify(array, count , i);
         }
     }
@@ -160,10 +154,9 @@ void insert(ticket* array[] , int* count , ticket T )
 
 
 
-void display(ticket** arr, int n){
-    printf("\n\nTicket ID NOT FOUND");
-    for(int i=0; i<n ;i++){
-        printf(" age :%d\nName : %s  ", arr[i]->age, arr[i]->name);
+void display(ticket* arr, int *n){
+    for(int i=0; i<*n ;i++){
+        printf(" age :%d\nName : %s  ", arr[i].age, arr[i].name);
         printf("\n\n");
     }
 
@@ -222,7 +215,7 @@ void cancel(bus* bu , int id){
     int i;
     for(i=0; i < *bu->confCount ; i++)
     {
-        if(id == bu->confimed[i]->id){
+        if(id == bu->confimed[i].id){
             found=true;
             break;
         }
@@ -256,7 +249,7 @@ void cancel(bus* bu , int id){
 
     for(i=0; i < *bu->waitCount ; i++)
         {
-            if(id == bu->waitList[i]->id){
+            if(id == bu->waitList[i].id){
                 found=true;
                 break;
             }
@@ -312,10 +305,7 @@ ticket* createNewTicket(char *name1, int age1, int id1){
         newTic->age  = age1;
         newTic->id   = id1;
         newTic->name = (char*) malloc(sizeof(name1));  
-        newTic->name = name1;
-
-        printf("\n\nTicket ID NOT FOUND");
-        return newTic;   
+        newTic->name = name1;   
 }
 
 
@@ -343,8 +333,9 @@ ticket* createNewTicket(char *name1, int age1, int id1){
 
 
 void bookTicket(bus* bu, ticket t){
+    printf("ssaaa : %d",*bu->confCount );
     if(*bu->confCount < MAX-1){
-        insert(bu->confimed , bu->confCount ,t);
+        insert(bu->confimed , bu->confCount , t);
     }
     else {
         insert(bu->waitList , bu->waitCount, t);
@@ -370,14 +361,14 @@ int main(){
     ticket *t3 = createNewTicket("adil", 16 , 1005);
     ticket *t4 = createNewTicket("sankal", 19 , 1004);
 
-int a=0;
-b[0].confCount=&a;
 
+int a=0;
+b[0].confCount= &a;
 bookTicket(&b[0], *t);
 // bookTicket(&b[0], *t2);
 // bookTicket(&b[0], *t3);
 // bookTicket(&b[0], *t4);
-display(b[0].confimed, *b[0].confCount);
+// display(b[0].confimed, b[0].confCount);
 
 
 
